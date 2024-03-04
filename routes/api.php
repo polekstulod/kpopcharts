@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\DashboardApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,10 @@ Route::get('/albums/{album}', 'App\Http\Controllers\API\AlbumApiController@show'
 Route::post('/albums', 'App\Http\Controllers\API\AlbumApiController@store');
 Route::put('/albums/{album}', 'App\Http\Controllers\API\AlbumApiController@update');
 Route::delete('/albums/{album}', 'App\Http\Controllers\API\AlbumApiController@destroy');
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/total-albums-sold', [DashboardApiController::class, 'totalAlbumsSold']);
+    Route::get('/combined-sales', [DashboardApiController::class, 'combinedSales']);
+    Route::get('/top-artist', [DashboardApiController::class, 'topArtist']);
+    Route::get('/albums-by-artist', [DashboardApiController::class, 'albumsByArtist']);
+});
